@@ -34,3 +34,5 @@ yarn-error.log*
 
 # vercel
 .vercel
+daily-manager.iml
+package-lock.json
