@@ -20,6 +20,9 @@ export default async (req, res) => {
     case 'POST' :
       try {
         const user = await User.create(req.body);
+        const bcrypt = require('bcrypt');
+        user.pw = bcrypt.hashSync(user.pw, 10);
+
         return res.status(201).json({
           success: true,
           data: user,
