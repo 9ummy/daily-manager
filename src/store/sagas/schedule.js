@@ -72,7 +72,7 @@ function* updateSchedule(action) {
 }
 
 function* watchUpdateSchedule() {
-  yield takeLatest(actionTypes.SCHEDULE_UPDATE_REQUEST, updatedSchedule);
+  yield takeLatest(actionTypes.SCHEDULE_UPDATE_REQUEST, updateSchedule);
 }
 
 function* deleteSchedule(action) {
@@ -94,7 +94,7 @@ function* deleteSchedule(action) {
 }
 
 function* watchDeleteSchedule(action) {
-  yield takeLatest(actionTypes.SCHEDULE_DELETE_REQUEST, deletedSchedule);
+  yield takeLatest(actionTypes.SCHEDULE_DELETE_REQUEST, deleteSchedule);
 }
 
 export default function* rootSaga() {

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import scheduleReducer from './schedule';
-import userReducer from './schedule';
+import userReducer from './user';
 
 const rootReducer = combineReducers({
   schedule: scheduleReducer,

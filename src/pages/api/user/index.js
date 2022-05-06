@@ -3,11 +3,13 @@ import 'utils/dbConnect';
 
 export default async (req, res) => {
   const { method } = req;
+  const bcrypt = require('bcrypt');
 
   switch (method) {
     case 'GET' :
       try {
         const user = await User.findOne(req.body);
+
         return res.status(200).json({
           success: true,
           data: user,
@@ -20,15 +22,17 @@ export default async (req, res) => {
       }
     case 'POST' :
       try {
-        const user = await User.create(req.body);
-        const bcrypt = require('bcrypt');
-        user.pw = bcrypt.hashSync(user.pw, 10);
+        const user = await User.create({
+          ...req.body,
+          pw: bcrypt.hashSync(req.body.pw, 10),
+        });
 
         return res.status(201).json({
           success: true,
           data: user,
         });
       } catch (error) {
+        console.log(error);
         return res.status(400).json({
           success: false,
           message: '가입이 실패했습니다.',

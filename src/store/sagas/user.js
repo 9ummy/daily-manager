@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import { all, put, takeLatest } from 'redux-saga/effects';
 
-function* signInUser(action) {
+function* joinUser(action) {
   try {
     const response = yield fetch('/api/user', {
       method: 'POST',
@@ -13,15 +13,15 @@ function* signInUser(action) {
 
     const newUser = yield response.json();
 
-    if (response.status == 200) {
+    if (response.status == 201) {
       yield put({
         type: actionTypes.USER_SIGNIN_SUCCESS,
         payload: newUser.data,
       });
 
-      //yield put(window.location.href = './login');
+      yield put(window.location.href = './login');
     } else {
-      alert('가입에 실패했습니다.');
+      alert('가입에 실패했습니다!');
     }
 
   } catch (error) {
@@ -32,8 +32,8 @@ function* signInUser(action) {
   }
 }
 
-export function* watchSignInUser() {
-  yield takeLatest(actionTypes.USER_SIGNIN_REQUEST, signInUser);
+export function* watchJoinUser() {
+  yield takeLatest(actionTypes.USER_SIGNIN_REQUEST, joinUser);
 }
 
 function* loginUser(action) {
@@ -47,7 +47,11 @@ function* loginUser(action) {
     });
 
     if (response.status == 200) {
-      localStorage.setItem('user', JSON.stringify(action.payload));
+      localStorage.setItem('user', JSON.stringify(
+        {
+          id : action.payload.id
+        }
+      ));
       const newUser = yield response.json();
       yield put({
         type: actionTypes.USER_LOGIN_SUCCESS,
@@ -84,7 +88,7 @@ export function* fetchUser(action) {
 
 export default function* rootSaga() {
   yield all([
-    watchSignInUser(),
+    watchJoinUser(),
     watchLogin(),
     watchLogout(),
   ]);
