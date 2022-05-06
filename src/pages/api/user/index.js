@@ -1,5 +1,5 @@
-import User from "models/User";
-import "utils/dbConnect";
+import User from 'models/User';
+import 'utils/dbConnect';
 
 export default async (req, res) => {
   const { method } = req;
@@ -7,6 +7,7 @@ export default async (req, res) => {
   switch (method) {
     case 'GET' :
       try {
+        const user = await User.findOne(req.body);
         return res.status(200).json({
           success: true,
           data: user,
@@ -30,6 +31,7 @@ export default async (req, res) => {
       } catch (error) {
         return res.status(400).json({
           success: false,
+          message: '가입이 실패했습니다.',
         });
       }
     default:

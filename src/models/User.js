@@ -15,6 +15,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: '{}',
   },
+  uuid : {
+    type : String,
+  }
 });
 
 export default mongoose.models.User ||
