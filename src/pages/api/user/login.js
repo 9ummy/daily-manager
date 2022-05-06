@@ -1,5 +1,6 @@
 import User from 'models/User';
 import 'utils/dbConnect';
+import axios, { Axios } from 'axios';
 
 export default async (req, res) => {
   const { method } = req;
@@ -13,10 +14,16 @@ export default async (req, res) => {
       const user = await User.findOne(query);
 
       if (user && bcrypt.compareSync(req.body.pw, user.pw)) {
-        return res.status(200).json({
-          success: true,
-          data: user,
-        });
+        axios.get("https://dev.aistudios.com/api/odin/generateClientToken?appId=aistudios.com&userKey=6443234b-77d5-4013-bfd6-bb9399f317d9")
+          .then((response) => {
+            return res.status(200).json({
+              success: true,
+              data: {
+                token : response.data.token,
+                ...user
+              },
+            });
+          })
       } else {
         return res.status(401).json({
           success: false,

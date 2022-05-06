@@ -47,12 +47,16 @@ function* loginUser(action) {
     });
 
     if (response.status == 200) {
+      const newUser = yield response.json();
+
       localStorage.setItem('user', JSON.stringify(
         {
-          id : action.payload.id
+          id : action.payload.id,
+          uuid : "6443234b-77d5-4013-bfd6-bb9399f317d9",
+          token : newUser.data.token
         }
       ));
-      const newUser = yield response.json();
+
       yield put({
         type: actionTypes.USER_LOGIN_SUCCESS,
         payload: newUser.data,
@@ -75,6 +79,7 @@ export function* watchLogin() {
 }
 
 function* logoutUser(action) {
+  localStorage.removeItem("user");
   yield put({ type: actionTypes.USER_LOGOUT_SUCCESS });
 }
 

@@ -21,6 +21,8 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "axios-curlirize": "^2.0.0",
     "bcrypt": "^5.0.1",
     "clsx": "^1.1.1",
     "dotenv": "^16.0.0",
