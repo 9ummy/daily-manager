@@ -19,11 +19,10 @@ function* joinUser(action) {
         payload: newUser.data,
       });
 
-      yield put(window.location.href = './login');
+      yield put((window.location.href = './login'));
     } else {
       alert('가입에 실패했습니다!');
     }
-
   } catch (error) {
     yield put({
       type: actionTypes.USER_SIGNIN_FAILURE,
@@ -49,23 +48,22 @@ function* loginUser(action) {
     if (response.status == 200) {
       const newUser = yield response.json();
 
-      localStorage.setItem('user', JSON.stringify(
-        {
-          id : action.payload.id,
-          uuid : "6443234b-77d5-4013-bfd6-bb9399f317d9",
-          token : newUser.data.token
-        }
-      ));
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          id: action.payload.id,
+          uuid: '6443234b-77d5-4013-bfd6-bb9399f317d9',
+          token: newUser.data.token,
+        }),
+      );
 
       yield put({
         type: actionTypes.USER_LOGIN_SUCCESS,
         payload: newUser.data,
       });
-
     } else {
       alert('가입한 ID 가 없거나 PW가 맞지 않습니다.');
     }
-
   } catch (error) {
     yield put({
       type: actionTypes.USER_LOGIN_FAILURE,
@@ -79,7 +77,7 @@ export function* watchLogin() {
 }
 
 function* logoutUser(action) {
-  localStorage.removeItem("user");
+  localStorage.removeItem('user');
   yield put({ type: actionTypes.USER_LOGOUT_SUCCESS });
 }
 
@@ -87,15 +85,4 @@ export function* watchLogout() {
   yield takeLatest(actionTypes.USER_LOGOUT_REQUEST, logoutUser);
 }
 
-export function* fetchUser(action) {
-
-}
-
-export default function* rootSaga() {
-  yield all([
-    watchJoinUser(),
-    watchLogin(),
-    watchLogout(),
-  ]);
-}
-
+export function* fetchUser(action) {}
