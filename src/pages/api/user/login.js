@@ -14,7 +14,7 @@ export default async (req, res) => {
       const user = await User.findOne(query);
 
       if (user && bcrypt.compareSync(req.body.pw, user.pw)) {
-        axios.get("https://dev.aistudios.com/api/odin/generateClientToken?appId=aistudios.com&userKey=6443234b-77d5-4013-bfd6-bb9399f317d9")
+        axios.get(`https://dev.aistudios.com/api/odin/generateClientToken?appId=aistudios.com&userKey=${process.env.DEV_UUID}`)
           .then((response) => {
             return res.status(200).json({
               success: true,
