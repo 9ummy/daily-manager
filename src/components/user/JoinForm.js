@@ -1,32 +1,27 @@
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { signInUser } from '../../store/actions/user';
+import { signInUser } from 'store/actions/user';
 
-export function JoinForm() {
-
+function JoinForm() {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
   const onSubmitHandler = (data) => {
-
     if (data) {
       if (data.pw !== data.cpw) {
         alert('입력된 암호와 확인 암호가 다릅니다!');
       }
       var joinUser = {
-        'id': data.id,
-        'email': data.email,
-        'pw': data.pw,
+        id: data.id,
+        email: data.email,
+        pw: data.pw,
       };
       dispatch(signInUser(joinUser));
     }
   };
 
   return (
-    <form className="form"
-          onSubmit={handleSubmit(onSubmitHandler)}
-          noValidate
-    >
+    <form className="form" onSubmit={handleSubmit(onSubmitHandler)} noValidate>
       <div className={'form__element'}>
         <label className={'label'} htmlFor="idInput">
           id
@@ -74,7 +69,6 @@ export function JoinForm() {
           등록
         </button>
       </div>
-
     </form>
   );
 }

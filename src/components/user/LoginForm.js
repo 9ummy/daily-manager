@@ -1,28 +1,25 @@
-import {useDispatch, useSelector} from "react-redux";
-import { useForm } from "react-hook-form";
-import { loginUser } from '../../store/actions/user';
-import { useRouter } from "next/router";
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { loginUser } from 'store/actions/user';
+import { useRouter } from 'next/router';
 
-export function LoginForm(){
+function LoginForm() {
   const router = useRouter();
 
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
   const onSubmitHandler = (data) => {
-    if(data){
+    if (data) {
       dispatch(loginUser(data));
       //TODO : 일정 리스트 생성 router.push("/sacContent")
     }
-  }
+  };
 
   return (
-    <form className="form"
-          onSubmit={handleSubmit(onSubmitHandler)}
-          noValidate
-    >
-      <div className={"form__element"}>
-        <label className={"label"} htmlFor="idInput">
+    <form className="form" onSubmit={handleSubmit(onSubmitHandler)} noValidate>
+      <div className={'form__element'}>
+        <label className={'label'} htmlFor="idInput">
           id
         </label>
         <input
@@ -35,8 +32,8 @@ export function LoginForm(){
         />
       </div>
 
-      <div className={"form__element"}>
-        <label className={"label"} htmlFor="pwInput">
+      <div className={'form__element'}>
+        <label className={'label'} htmlFor="pwInput">
           password
         </label>
         <input
@@ -45,7 +42,7 @@ export function LoginForm(){
           name="pw"
           placeholder="password"
           className="input"
-          ref={register({ required : true })}
+          ref={register({ required: true })}
         />
       </div>
 
@@ -57,3 +54,5 @@ export function LoginForm(){
     </form>
   );
 }
+
+export default LoginForm;
