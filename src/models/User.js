@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   },
   model: {
     type: String,
-    default: '{}',
+    default: '{"language": "ko", "model": "ysy", "clothes": "2"}',
   },
   uuid : {
     type : String,
