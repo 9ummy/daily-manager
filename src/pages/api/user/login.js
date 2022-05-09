@@ -15,15 +15,29 @@ export default async (req, res) => {
 
       if (user && bcrypt.compareSync(req.body.pw, user.pw)) {
         axios.get(`https://dev.aistudios.com/api/odin/generateClientToken?appId=aistudios.com&userKey=${process.env.DEV_UUID}`)
-          .then((response) => {
-            return res.status(200).json({
-              success: true,
-              data: {
-                token : response.data.token,
-                ...user
-              },
-            });
-          })
+          .then((getResponse) => {
+            const postReq = {
+              "appId":"aistudios.com",
+              "platform":"web",
+              "isClientToken":true,
+              "token": getResponse.data.token,
+              "uuid": process.env.DEV_UUID,
+              "sdk_v":"1.0",
+              "clientHostname":"aistudios.com"
+            }
+            axios.post('https://dev.aistudios.com/api/odin/generateToken', postReq)
+              .then((postResponse) => {
+                return res.status(200).json({
+                  success: true,
+                  data: {
+                    uuid : process.env.DEV_UUID,
+                    token : postResponse.data.token,
+                    tokenExpire : postResponse.data.tokenExpire,
+                    ...user
+                  },
+                });
+              });
+          });
       } else {
         return res.status(401).json({
           success: false,

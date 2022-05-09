@@ -52,8 +52,9 @@ function* loginUser(action) {
         'user',
         JSON.stringify({
           id: action.payload.id,
-          uuid: '6443234b-77d5-4013-bfd6-bb9399f317d9',
+          uuid: newUser.data.uuid,
           token: newUser.data.token,
+          tokenExpire: newUser.data.tokenExpire,
         }),
       );
 
