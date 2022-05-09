@@ -16,6 +16,10 @@ function LoginForm() {
     }
   };
 
+  const joinButtonHandler = () => {
+      router.push("./join");
+  }
+
   return (
     <form className="form" onSubmit={handleSubmit(onSubmitHandler)} noValidate>
       <div className={'form__element'}>
@@ -50,6 +54,9 @@ function LoginForm() {
         <button className="btn btn__primary btn__icon" type="submit">
           로그인
         </button>
+        <a href="./join">
+          가입
+        </a>
       </div>
     </form>
   );
