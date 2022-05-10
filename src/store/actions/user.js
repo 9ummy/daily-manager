@@ -1,8 +1,9 @@
 import * as actionTypes from './actionTypes';
 
-export const updateUser = () => {
+export const updateUser = (user) => {
   return {
     type: actionTypes.USER_UPDATE_REQUEST,
+    payload : user,
   };
 };
 

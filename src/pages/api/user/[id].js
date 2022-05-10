@@ -6,27 +6,45 @@ export default async (req, res) => {
     query: { id },
     method,
   } = req;
+  const bcrypt = require('bcrypt');
 
   switch (method) {
     case 'GET' :
       try {
-        const user = await User.findById(id);
-
-        return res.status(200).json({
-          success: true,
-          data: user,
+        const user = await User.findOne({
+          id : id
         });
+        if(user){
+          return res.status(200).json({
+            success: true,
+            data: user,
+          });
+        } else {
+          return res.status(204).json({ // 204 no data
+            success: true,
+            data : null
+          });
+        }
       } catch (error) {
-        return res.status(404).json({
+        return res.status(400).json({
           success: false,
         });
       }
     case 'PUT' :
       try {
-        const user = await User.findByIdAndDelete(id, req.body, {
-          new: true,
-          nunValidators: true,
+        let setData = req.body;
+        if(setData.pw){
+          setData.pw = bcrypt.hashSync(setData.pw, 10);
+        }
+
+        await User.update({id : id}, {
+          $set: setData
         });
+
+        return res.status(200).json({
+          success: true
+        });
+
       } catch (error) {
         return res.status(400).json({
           success: false,

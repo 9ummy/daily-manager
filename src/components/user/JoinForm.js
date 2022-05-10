@@ -13,6 +13,7 @@ function JoinForm() {
     if (data) {
       if (data.pw !== data.cpw) {
         alert('입력된 암호와 확인 암호가 다릅니다!');
+        return;
       }
       var joinUser = {
         id: data.id,

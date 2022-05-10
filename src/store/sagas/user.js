@@ -87,3 +87,54 @@ export function* watchLogout() {
 }
 
 export function* fetchUser(action) {}
+
+function* updateUser(action){
+  const userId = JSON.parse(localStorage.getItem("user")).id;
+  const pw = action.payload.pw;
+  const newPw = action.payload.newPw;
+
+  try {
+    const response = yield fetch('/api/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify( {
+        id : userId,
+        pw : pw
+      }),
+    });
+
+    if(response.status === 200){
+      const response2 = yield fetch(`/api/user/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body : JSON.stringify({
+          pw : newPw
+        }),
+      })
+      if(response2.status === 200){
+        alert("수정 완료");
+        yield put((window.location.href = './login'));
+      } else {
+        alert("수정 하는데 오류가 발생했습니다.");
+      }
+
+    } else {
+      alert("비밀번호가 잘못되었습니다.")
+    }
+
+  } catch (error) {
+    yield put({
+      type: actionTypes.USER_UPDATE_FAILURE,
+      payload: error.message,
+    });
+  }
+
+}
+
+export function* watchUpdateUser(){
+  yield takeLatest(actionTypes.USER_UPDATE_REQUEST, updateUser)
+}

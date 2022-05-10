@@ -27,7 +27,7 @@ export default async (req, res) => {
           pw: bcrypt.hashSync(req.body.pw, 10),
         });
 
-        return res.status(201).json({
+        return res.status(201).json({ // 201 created
           success: true,
           data: user,
         });

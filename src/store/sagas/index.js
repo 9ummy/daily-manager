@@ -5,7 +5,12 @@ import {
   watchDeleteSchedule,
   watchUpdateSchedule,
 } from './schedule';
-import { watchJoinUser, watchLogin, watchLogout } from './user';
+import {
+  watchJoinUser,
+  watchLogin,
+  watchLogout,
+  watchUpdateUser
+} from './user';
 
 export default function* rootSaga() {
   yield all([
@@ -16,5 +21,6 @@ export default function* rootSaga() {
     watchJoinUser(),
     watchLogin(),
     watchLogout(),
+    watchUpdateUser()
   ]);
 }
