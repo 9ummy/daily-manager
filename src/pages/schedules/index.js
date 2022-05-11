@@ -4,6 +4,7 @@ import { fetchSchedules } from 'store/actions/schedule';
 import moment from 'moment';
 import styles from 'styles/schedules.module.css';
 import Schedule from 'components/schedule/Schedule';
+import { deleteSchedule } from 'store/actions/schedule';
 
 const dateFormat = 'YYYY년 MM월 DD일';
 
@@ -14,6 +15,7 @@ function Schedules() {
       ? JSON.parse(window.localStorage.getItem('user'))
       : null,
   );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,8 +27,6 @@ function Schedules() {
       (schedule) => schedule.authorId == loginUser.id,
     ),
   );
-
-  console.log(schedules);
 
   const handleDateChange = (type) => {
     const tmp = moment(date, dateFormat);
@@ -47,7 +47,11 @@ function Schedules() {
         <button onClick={() => handleDateChange('next')}>next</button>
       </div>
       {schedules.map((schedule, idx) => (
-        <Schedule key={idx} data={schedule} />
+        <Schedule
+          key={idx}
+          data={schedule}
+          handleDeleteSchedule={() => dispatch(deleteSchedule(schedule._id))}
+        />
       ))}
       <button>일정 추가</button>
     </div>

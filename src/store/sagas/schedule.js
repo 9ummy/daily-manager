@@ -77,13 +77,11 @@ export function* watchUpdateSchedule() {
 
 function* deleteSchedule(action) {
   try {
-    const response = yield fetch(`/api/schedules/${action.payload}`, {
-      method: 'DELETE ',
-    });
+    const response = yield fetch(`/api/schedules/${action.payload}/delete`);
     const deletedSchedule = yield response.json();
     yield put({
       type: actionTypes.SCHEDULE_DELETE_SUCCESS,
-      payload: deletedSchedule.data.id,
+      payload: deletedSchedule.data,
     });
   } catch (error) {
     yield put({

@@ -34,20 +34,8 @@ export default async (req, res) => {
           success: false,
         });
       }
-    case 'DELETE':
-      try {
-        await Schedule.deleteOne({ _id: id });
-        return res.status(200).json({
-          success: true,
-          data: { id },
-        });
-      } catch (error) {
-        return res.status(400).json({
-          success: false,
-        });
-      }
     default:
-      res.setHeaders('Allow', ['GET', 'PUT', 'DELETE']);
+      res.setHeaders('Allow', ['GET', 'PUT']);
       return res
         .status(405)
         .json({ success: false })
