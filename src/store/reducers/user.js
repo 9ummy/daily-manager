@@ -14,7 +14,11 @@ const userReducer = (state = initialState, action) => {
     case HYDRATE:
       return { ...state, ...action.payload };
 //    case actionTypes.USER_FETCH_SUCCESS :
-//    case actionTypes.USER_UPDATE_SUCCESS :
+    case actionTypes.USER_UPDATE_PW_SUCCESS :
+      return {
+        ...state
+      }
+
     case actionTypes.USER_LOGIN_SUCCESS :
       return {
         loginUser: action.payload.id,

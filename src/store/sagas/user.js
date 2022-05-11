@@ -88,7 +88,7 @@ export function* watchLogout() {
 
 export function* fetchUser(action) {}
 
-function* updateUser(action){
+function* updateUserPassword(action){
   const userId = JSON.parse(localStorage.getItem("user")).id;
   const pw = action.payload.pw;
   const newPw = action.payload.newPw;
@@ -135,6 +135,14 @@ function* updateUser(action){
 
 }
 
-export function* watchUpdateUser(){
-  yield takeLatest(actionTypes.USER_UPDATE_REQUEST, updateUser)
+export function* watchUpdateUserPassword(){
+  yield takeLatest(actionTypes.USER_UPDATE_PW_REQUEST, updateUserPassword)
+}
+
+function* updateUserModel(action){
+
+}
+
+export function* watchUpdateUserModel(){
+  yield takeLatest(actionTypes.USER_UPDATE_MODEL_REQUEST, updateUserModel)
 }

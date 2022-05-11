@@ -9,7 +9,7 @@ import {
   watchJoinUser,
   watchLogin,
   watchLogout,
-  watchUpdateUser
+  watchUpdateUserPassword
 } from './user';
 
 export default function* rootSaga() {
@@ -21,6 +21,6 @@ export default function* rootSaga() {
     watchJoinUser(),
     watchLogin(),
     watchLogout(),
-    watchUpdateUser()
+    watchUpdateUserPassword()
   ]);
 }

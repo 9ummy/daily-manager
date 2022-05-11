@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { updateUser } from "../../store/actions/user";
+import { updateUserPassword } from "../../store/actions/user";
 
 function EditPwForm(){
   const router = useRouter();
@@ -15,7 +15,7 @@ function EditPwForm(){
         return;
       }
     }
-    dispatch(updateUser(data));
+    dispatch(updateUserPassword(data));
   }
 
   return (
