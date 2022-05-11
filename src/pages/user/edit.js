@@ -1,9 +1,9 @@
 import EditPwForm from 'components/user/EditPwForm'
-import loginCheck from '../../utils/loginCheck'
+import { loginCheck } from '../../utils/loginCheck'
 
 function Landing(){
 
-  loginCheck
+  loginCheck();
 
   return (
     <div>
