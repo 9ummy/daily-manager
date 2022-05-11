@@ -7,6 +7,13 @@ export const updateUserPassword = (user) => {
   };
 };
 
+export const updateUserModel = (user) => {
+  return {
+    type: actionTypes.USER_UPDATE_MODEL_REQUEST,
+    payload : user,
+  };
+};
+
 export const fetchUser = () => {
   return {
     type: actionTypes.USER_FETCH_REQUEST,

@@ -65,7 +65,6 @@ function EditPwForm(){
         </button>
       </div>
     </form>
-
   )
 
 }
