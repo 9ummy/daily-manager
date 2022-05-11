@@ -31,7 +31,7 @@ function Schedules() {
   const handleDateChange = (type) => {
     const tmp = moment(date, dateFormat);
     if (type === 'prev') {
-      setDate(tmp.subtract(1, 'days')).format(dateFormat);
+      setDate(tmp.subtract(1, 'days').format(dateFormat));
     }
     if (type === 'next') {
       setDate(tmp.add(1, 'days').format(dateFormat));
