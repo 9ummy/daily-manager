@@ -44,11 +44,18 @@ function NewSchedule() {
   };
 
   return (
-    <form id="new-schedule-form" onSubmit={handleSubmit}>
+    <form
+      className="container w-50"
+      id="new-schedule-form"
+      onSubmit={handleSubmit}
+    >
       <h2>새 일정 등록</h2>
       <div>
-        <label htmlFor="date">날짜</label>
+        <label className="form-label" htmlFor="date">
+          날짜
+        </label>
         <input
+          className="form-control"
           name="date"
           type="date"
           value={form.date}
@@ -56,8 +63,11 @@ function NewSchedule() {
         />
       </div>
       <div>
-        <label htmlFor="time">시간</label>
+        <label className="form-label" htmlFor="time">
+          시간
+        </label>
         <input
+          className="form-control"
           name="time"
           type="time"
           value={form.time}
@@ -65,18 +75,32 @@ function NewSchedule() {
         />
       </div>
       <div>
-        <label htmlFor="title">제목</label>
-        <input name="title" value={form.title} onChange={handleInputChange} />
+        <label className="form-label" htmlFor="title">
+          제목
+        </label>
+        <input
+          className="form-control"
+          name="title"
+          value={form.title}
+          onChange={handleInputChange}
+        />
       </div>
       <div>
-        <label htmlFor="description">설명</label>
+        <label className="form-label" htmlFor="description">
+          설명
+        </label>
         <textarea
+          className="form-control"
           name="description"
           value={form.description}
           onChange={handleInputChange}
         />
       </div>
-      <button type="submit" form="new-schedule-form">
+      <button
+        className="btn btn-primary m-1"
+        type="submit"
+        form="new-schedule-form"
+      >
         등록하기
       </button>
     </form>
