@@ -42,7 +42,11 @@ function Schedules() {
         <button onClick={() => handleDateChange('next')}>next</button>
       </div>
       {scheduleState.scheduleList
-        .filter((schedule) => schedule.authorId === loginUser.id)
+        .filter(
+          (schedule) =>
+            schedule.authorId === loginUser.id &&
+            moment(schedule.time).format(dateFormat) === date,
+        )
         .map((schedule, idx) => (
           <Schedule
             key={idx}
