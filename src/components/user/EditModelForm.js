@@ -13,7 +13,7 @@ function EditModelForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onModelSubmitHandler)} noValidate>
+    <form className="form border-bottom" onSubmit={handleSubmit(onModelSubmitHandler)} noValidate>
       <div>
         <label>모델</label>
         <input type="radio" defaultChecked={true} />
@@ -38,7 +38,7 @@ function EditModelForm() {
       </div>
 
       <div>
-        <button type="submit">
+        <button type="submit" className="btn btn-light m-1">
           모델 수정
         </button>
       </div>

@@ -7,7 +7,8 @@ function Landing(){
   loginCheck();
 
   return (
-    <div>
+    <div className="container w-50">
+      <h1 className="h2 border-bottom">회원 정보 수정</h1>
       <EditPwForm />
       <br />
       <EditModelForm />

@@ -22,39 +22,33 @@ function LoginForm() {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmitHandler)} noValidate>
-      <div className={'form__element'}>
-        <label className={'label'} htmlFor="idInput">
-          id
-        </label>
-        <input
-          type="text"
-          id="idInput"
-          name="id"
-          placeholder="id"
-          className="input"
-          ref={register({ required: true })}
-        />
+      <div className="mb-2">
+        <div className="form-group row mb-2">
+          <input
+            type="text"
+            id="idInput"
+            name="id"
+            placeholder="ID"
+            className="form-control"
+            ref={register({ required: true })}
+          />
+        </div>
+        <div className="form-group row mb-2">
+          <input
+            type="password"
+            id="pwInput"
+            name="pw"
+            placeholder="비밀번호"
+            className="form-control"
+            ref={register({ required: true })}
+          />
+        </div>
       </div>
-
-      <div className={'form__element'}>
-        <label className={'label'} htmlFor="pwInput">
-          password
-        </label>
-        <input
-          type="password"
-          id="pwInput"
-          name="pw"
-          placeholder="password"
-          className="input"
-          ref={register({ required: true })}
-        />
-      </div>
-
-      <div className="form__action">
-        <button className="btn btn__primary btn__icon" type="submit">
+      <div className="text-center">
+        <button className="btn btn-primary m-1" type="submit">
           로그인
         </button>
-        <a href="./join">
+        <a href="./join" className="btn btn-link m-1">
           가입
         </a>
       </div>
