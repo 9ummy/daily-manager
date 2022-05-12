@@ -47,7 +47,6 @@ function* loginUser(action) {
 
     if (response.status == 200) {
       const newUser = yield response.json();
-
       localStorage.setItem(
         'user',
         JSON.stringify({
@@ -55,6 +54,7 @@ function* loginUser(action) {
           uuid: newUser.data.uuid,
           token: newUser.data.token,
           tokenExpire: newUser.data.tokenExpire,
+          model : JSON.parse(newUser.data._doc.model)
         }),
       );
 
