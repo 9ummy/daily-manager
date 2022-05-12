@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
 import { updateSchedule } from 'store/actions/schedule';
-
-const dateFormat = 'YYYY년 MM월 DD일 HH시 MM분';
+import styles from 'styles/scheduleDetail.module.css';
 
 function ScheduleDetail() {
   const [data, setData] = useState({});
@@ -41,8 +40,6 @@ function ScheduleDetail() {
     setNewForm({ ...newForm, [name]: value });
   };
 
-  console.log(data);
-
   const handleUpdate = (e) => {
     e.preventDefault();
     dispatch(
@@ -61,45 +58,89 @@ function ScheduleDetail() {
   };
 
   return (
-    <>
-      <button onClick={() => router.back()}>뒤로가기</button>
+    <div className="container w-50">
       {isEditMode ? (
-        <div>
-          <input
-            name="title"
-            placeholder="제목"
-            value={newForm.title}
-            onChange={handleInputChange}
-          />
-          <input
-            name="date"
-            type="date"
-            value={newForm.date}
-            onChange={handleInputChange}
-          />
-          <input
-            name="time"
-            type="time"
-            value={newForm.time}
-            onChange={handleInputChange}
-          />
-          <textarea
-            name="description"
-            placeholder="설명"
-            value={newForm.description}
-            onChange={handleInputChange}
-          />
-          <button onClick={handleUpdate}>완료</button>
+        <div className={`card ${styles.editCard}`}>
+          <h3>일정 수정하기</h3>
+          <div>
+            <label className="form-label" htmlFor="title">
+              제목
+            </label>
+            <input
+              id="title"
+              className="form-control"
+              name="title"
+              placeholder="제목"
+              value={newForm.title}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="form-label" htmlFor="date">
+              날짜
+            </label>
+            <input
+              id="date"
+              className="form-control"
+              name="date"
+              type="date"
+              value={newForm.date}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="form-label" htmlFor="time">
+              시간
+            </label>
+            <input
+              id="time"
+              className="form-control"
+              name="time"
+              type="time"
+              value={newForm.time}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="form-label" htmlFor="description">
+              설명
+            </label>
+            <textarea
+              id="description"
+              className="form-control"
+              name="description"
+              placeholder="설명"
+              value={newForm.description}
+              onChange={handleInputChange}
+            />
+          </div>
+          <button className="btn btn-primary" onClick={handleUpdate}>
+            완료
+          </button>
         </div>
       ) : (
-        <div>
+        <div className={`card ${styles.card}`}>
           <h3>{data.title}</h3>
-          <div>{moment(data.time).format(dateFormat)}</div>
+          <div>{moment(data.time).format('YYYY년 MM월 DD일')}</div>
+          <div>{moment(data.time).format('HH시 MM분')}</div>
           <div>{data.description}</div>
-          <button onClick={() => setIsEditMode(true)}>수정</button>
+          <div className={styles.buttonContainer}>
+            <button
+              className="btn btn-outline-primary"
+              onClick={() => router.back()}
+            >
+              뒤로가기
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => setIsEditMode(true)}
+            >
+              수정
+            </button>
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
