@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { updateUser } from "../../store/actions/user";
+import { updateUserPassword } from "../../store/actions/user";
 
 function EditPwForm(){
   const router = useRouter();
@@ -15,57 +15,47 @@ function EditPwForm(){
         return;
       }
     }
-    dispatch(updateUser(data));
+    dispatch(updateUserPassword(data));
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit(onPasswordSubmitHandler)} noValidate>
-      <div>
-        <label htmlFor="pwInput">
-          password
-        </label>
+    <form className="form border-bottom" onSubmit={handleSubmit(onPasswordSubmitHandler)} noValidate>
+      <div className="mb-2">
         <input
           type="password"
           id="pwInput"
           name="pw"
-          placeholder="password"
-          className="input"
+          placeholder="기존 비밀번호"
+          className="form-control"
           ref={register({ required: true })}
         />
       </div>
-      <div>
-        <label htmlFor="newPasswordInput">
-          new password
-        </label>
+      <div className="mb-2">
         <input
           type="password"
           id="newPasswordInput"
           name="newPw"
-          placeholder="password"
-          className="input"
+          placeholder="새 비밀번호"
+          className="form-control"
           ref={register({ required: true })}
         />
       </div>
-      <div>
-        <label htmlFor="pwConfirmInput">
-          new password confirm
-        </label>
+      <div className="mb-2">
         <input
           type="password"
           id="pwConfirmInput"
           name="newCpw"
-          placeholder="password confirm"
-          className="input"
+          placeholder="새 비밀번호 확인"
+          className="form-control"
           ref={register({ required: true })}
         />
       </div>
       <div>
-        <button type="submit">
-          수정
+        <button type="submit" className="btn btn-light m-1">
+          비밀번호 변경
         </button>
       </div>
     </form>
-
   )
 
 }

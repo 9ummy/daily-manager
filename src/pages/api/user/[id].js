@@ -37,7 +37,7 @@ export default async (req, res) => {
           setData.pw = bcrypt.hashSync(setData.pw, 10);
         }
 
-        await User.update({id : id}, {
+        await User.updateOne({id : id}, {
           $set: setData
         });
 
@@ -63,11 +63,10 @@ export default async (req, res) => {
         });
       }
     default:
-      res.setHeaders('Allow', ['GET', 'PUT', 'DELETE']);
       return res
         .status(405)
         .json({ success: false })
-        .end(`Method ${method} Not Allowed`);
+        .end(`Not Allowed`);
 
   }
 
