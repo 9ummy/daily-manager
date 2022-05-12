@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { signInUser } from 'store/actions/user';
-import {useRouter} from "next/router";
+import { useRouter } from 'next/router';
 
 function JoinForm() {
   const router = useRouter();
@@ -24,8 +25,8 @@ function JoinForm() {
     }
   };
   const loginButtonHandler = () => {
-    router.push("./login");
-  }
+    router.push('./login');
+  };
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmitHandler)} noValidate>
@@ -66,9 +67,7 @@ function JoinForm() {
         <button className="btn btn-primary m-1" type="submit">
           등록
         </button>
-        <a href="./login/" className="btn btn-link m-1">
-          로그인 화면 으로
-        </a>
+        <Link href="/user/login/" className="btn btn-link m-1">로그인 화면으로</Link>
       </div>
     </form>
   );
