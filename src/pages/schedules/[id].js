@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
+import { updateSchedule } from 'store/actions/schedule';
 
 const dateFormat = 'YYYY년 MM월 DD일 HH시 MM분';
 
@@ -16,6 +17,7 @@ function ScheduleDetail() {
   });
   const [isEditMode, setIsEditMode] = useState(false);
 
+  const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
 
@@ -37,6 +39,25 @@ function ScheduleDetail() {
     e.preventDefault();
     const { name, value } = e.target;
     setNewForm({ ...newForm, [name]: value });
+  };
+
+  console.log(data);
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    dispatch(
+      updateSchedule({
+        _id: id,
+        title: newForm.title,
+        description: newForm.description,
+        time: `${newForm.date} ${newForm.time}`,
+      }),
+    );
+    setData({
+      ...newForm,
+      time: moment(`${newForm.date} ${newForm.time}`, 'yyyy-MM-DD HH:ss'),
+    });
+    setIsEditMode(false);
   };
 
   return (
@@ -68,7 +89,7 @@ function ScheduleDetail() {
             value={newForm.description}
             onChange={handleInputChange}
           />
-          <button onClick={() => setIsEditMode(false)}>완료</button>
+          <button onClick={handleUpdate}>완료</button>
         </div>
       ) : (
         <div>
