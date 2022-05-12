@@ -5,13 +5,18 @@ import moment from 'moment';
 function Schedule({ data, handleDeleteSchedule }) {
   const { _id, title, description, time } = data;
   return (
-    <div className={styles.container}>
+    <li className={`${styles.container} list-group-item`}>
       <div className={styles.time}>{moment(time).format('HH:mm')}</div>
       <Link href={`/schedules/${_id}`} passHref>
         <div className={styles.title}>{title}</div>
       </Link>
-      <button onClick={handleDeleteSchedule}>삭제</button>
-    </div>
+      <button
+        className="btn btn-outline-primary"
+        onClick={handleDeleteSchedule}
+      >
+        삭제
+      </button>
+    </li>
   );
 }
 

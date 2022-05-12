@@ -34,30 +34,65 @@ function Schedules() {
   };
 
   return (
-    <div className={styles.container}>
-      <h2>My Schedules</h2>
+    <div className={`${styles.container} container`}>
+      <h1>My Schedules</h1>
       <div className={styles.dateSelector}>
-        <button onClick={() => handleDateChange('prev')}>prev</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => handleDateChange('prev')}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-caret-left-fill"
+            viewBox="0 0 16 16"
+          >
+            <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+          </svg>
+        </button>
         <h3>{date}</h3>
-        <button onClick={() => handleDateChange('next')}>next</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => handleDateChange('next')}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-caret-right-fill"
+            viewBox="0 0 16 16"
+          >
+            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+          </svg>
+        </button>
       </div>
-      {scheduleState.scheduleList
-        .filter(
-          (schedule) =>
-            schedule.authorId === loginUser.id &&
-            moment(schedule.time).format(dateFormat) === date,
-        )
-        .map((schedule, idx) => (
-          <Schedule
-            key={idx}
-            data={schedule}
-            handleDeleteSchedule={() => {
-              dispatch(deleteSchedule(schedule._id));
-              dispatch(fetchSchedules());
-            }}
-          />
-        ))}
-      <button onClick={() => router.push('/schedules/new')}>일정 추가</button>
+      <ul className="list-group list-group-flush" style={{ width: '100%' }}>
+        {scheduleState.scheduleList
+          .filter(
+            (schedule) =>
+              schedule.authorId === loginUser.id &&
+              moment(schedule.time).format(dateFormat) === date,
+          )
+          .map((schedule, idx) => (
+            <Schedule
+              key={idx}
+              data={schedule}
+              handleDeleteSchedule={() => {
+                dispatch(deleteSchedule(schedule._id));
+                dispatch(fetchSchedules());
+              }}
+            />
+          ))}
+      </ul>
+      <button
+        className="btn btn-link"
+        onClick={() => router.push('/schedules/new')}
+      >
+        일정 추가
+      </button>
     </div>
   );
 }
