@@ -15,7 +15,7 @@ function Header() {
           className="btn btn-outline-primary"
           onClick={() => router.push('/user/edit')}
         >
-          회원정보 변경
+          회원 정보 수정
         </button>
         <button
           className="btn btn-primary"
