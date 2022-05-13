@@ -4,19 +4,19 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { addSchedule } from 'store/actions/schedule';
 import { loginCheck } from 'utils/loginCheck';
+import axios from 'axios';
 
 const dateFormat = 'yyyy-MM-DD';
-const timeFormat = 'HH:ss';
+const timeFormat = 'HH:mm';
 
 function NewSchedule() {
   const [form, setForm] = useState({
-    authorId: '',
-    token: '',
     date: moment().format(dateFormat),
     time: moment().format(timeFormat),
     title: '',
     description: '',
   });
+
   const loginUser = loginCheck();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -32,13 +32,29 @@ function NewSchedule() {
     if (!form.title) {
       alert('일정 제목을 입력해주세요');
     } else {
-      const requestForm = {
-        authorId: loginUser.id,
-        time: `${form.date} ${form.time}`,
-        title: form.title,
-        description: form.description,
-      };
-      dispatch(addSchedule(requestForm));
+      try {
+        axios
+          .post('/api/video', {
+            token: loginUser.token,
+            model: loginUser.model,
+            text: `${moment(form.time, 'HH:mm').format('HH시 mm분')}에 ${
+              form.title
+            } 일정이 있습니다.`,
+          })
+          .then((res) => {
+            dispatch(
+              addSchedule({
+                authorId: loginUser.id,
+                time: `${form.date} ${form.time}`,
+                title: form.title,
+                description: form.description,
+                videoKey: res.data.videoKey,
+              }),
+            );
+          });
+      } catch (error) {
+        alert('문제가 발생했습니다.');
+      }
       router.push('/schedules');
     }
   };

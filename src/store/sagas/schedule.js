@@ -1,5 +1,6 @@
 import { all, put, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
+import axios from 'axios';
 
 function* fetchSchedules() {
   try {
@@ -60,7 +61,7 @@ function* updateSchedule(action) {
     const updatedSchedule = yield response.json();
 
     yield put({
-      type: actionTypes.SCHEDULE_UPDATE_SUCCEEDED,
+      type: actionTypes.SCHEDULE_UPDATE_SUCCESS,
       payload: updatedSchedule.data,
     });
   } catch (error) {
@@ -81,7 +82,7 @@ function* deleteSchedule(action) {
     const deletedSchedule = yield response.json();
     yield put({
       type: actionTypes.SCHEDULE_DELETE_SUCCESS,
-      payload: deletedSchedule.data,
+      payload: deletedSchedule.data.id,
     });
   } catch (error) {
     yield put({

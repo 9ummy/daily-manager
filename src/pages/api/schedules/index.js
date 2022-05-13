@@ -18,10 +18,10 @@ export default async (req, res) => {
       }
     case 'POST':
       try {
-        const schedules = await Schedule.create(req.body);
+        const schedule = await Schedule.create(req.body);
         return res.status(201).json({
           success: true,
-          data: schedules,
+          data: schedule,
         });
       } catch (error) {
         return res.status(400).json({

@@ -16,6 +16,11 @@ const ScheduleSchema = new mongoose.Schema({
     required: false,
     trim: true,
   },
+  videoKey: {
+    type: String,
+    required: false,
+    trim: true,
+  },
   time: {
     type: Date,
     required: [true, 'Time is required!'],
