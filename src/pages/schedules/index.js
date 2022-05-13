@@ -82,7 +82,6 @@ function Schedules() {
               data={schedule}
               handleDeleteSchedule={() => {
                 dispatch(deleteSchedule(schedule._id));
-                dispatch(fetchSchedules());
               }}
             />
           ))}

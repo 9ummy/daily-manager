@@ -38,7 +38,7 @@ const scheduleReducer = (state = initialState, action) => {
       };
     case actionTypes.SCHEDULE_DELETE_SUCCESS:
       const newScheduleList = state.scheduleList.filter(
-        (schedule) => schedule._id === action.payload,
+        (schedule) => schedule._id !== action.payload,
       );
       return {
         ...state,

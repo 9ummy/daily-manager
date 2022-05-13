@@ -28,7 +28,7 @@ function ScheduleDetail() {
           title: res.data.data.title,
           description: res.data.data.description,
           date: moment(res.data.data.time).format('yyyy-MM-DD'),
-          time: moment(res.data.data.time).format('HH:ss'),
+          time: moment(res.data.data.time).format('HH:mm'),
         });
       });
     }
