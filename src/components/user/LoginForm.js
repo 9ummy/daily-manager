@@ -13,7 +13,6 @@ function LoginForm() {
   const onSubmitHandler = (data) => {
     if (data) {
       dispatch(loginUser(data));
-      //TODO : 일정 리스트 생성 router.push("/sacContent")
     }
   };
 

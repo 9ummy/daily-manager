@@ -1,28 +1,29 @@
+import bcrypt from 'bcrypt';
 import User from 'models/User';
-import "utils/dbConnect";
+import 'utils/dbConnect';
 
 export default async (req, res) => {
   const {
     query: { id },
     method,
   } = req;
-  const bcrypt = require('bcrypt');
 
   switch (method) {
-    case 'GET' :
+    case 'GET':
       try {
         const user = await User.findOne({
-          id : id
+          id: id,
         });
-        if(user){
+        if (user) {
           return res.status(200).json({
             success: true,
             data: user,
           });
         } else {
-          return res.status(204).json({ // 204 no data
+          return res.status(204).json({
+            // 204 no data
             success: true,
-            data : null
+            data: null,
           });
         }
       } catch (error) {
@@ -30,27 +31,29 @@ export default async (req, res) => {
           success: false,
         });
       }
-    case 'PUT' :
+    case 'PUT':
       try {
-        let setData = req.body;
-        if(setData.pw){
+        const setData = req.body;
+        if (setData.pw) {
           setData.pw = bcrypt.hashSync(setData.pw, 10);
         }
 
-        await User.updateOne({id : id}, {
-          $set: setData
-        });
+        await User.updateOne(
+          { id: id },
+          {
+            $set: setData,
+          },
+        );
 
         return res.status(200).json({
-          success: true
+          success: true,
         });
-
       } catch (error) {
         return res.status(400).json({
           success: false,
         });
       }
-    case 'DELETE' :
+    case 'DELETE':
       try {
         await User.deleteOne({ _id: id });
         return res.status(200).json({
@@ -63,12 +66,6 @@ export default async (req, res) => {
         });
       }
     default:
-      return res
-        .status(405)
-        .json({ success: false })
-        .end(`Not Allowed`);
-
+      return res.status(405).json({ success: false }).end(`Not Allowed`);
   }
-
-
-}
+};

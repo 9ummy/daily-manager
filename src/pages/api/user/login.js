@@ -1,10 +1,10 @@
+import axios from 'axios';
+import bcrypt from 'bcrypt';
 import User from 'models/User';
 import 'utils/dbConnect';
-import axios, { Axios } from 'axios';
 
 export default async (req, res) => {
   const { method } = req;
-  const bcrypt = require('bcrypt');
 
   if (method === 'POST') {
     try {
