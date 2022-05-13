@@ -62,6 +62,8 @@ function* loginUser(action) {
         type: actionTypes.USER_LOGIN_SUCCESS,
         payload: newUser.data,
       });
+
+      yield put((window.location.href = '/schedules'));
     } else {
       alert('가입한 ID 가 없거나 PW가 맞지 않습니다.');
     }

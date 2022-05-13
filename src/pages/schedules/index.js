@@ -23,6 +23,16 @@ function Schedules() {
     dispatch(fetchSchedules());
   }, [dispatch]);
 
+  useEffect(() => {
+    const interVal = setInterval(() => {
+      let scheduleInTime = scheduleState.scheduleList.filter( (v) => { return parseInt(new Date(v.time)/1000) == parseInt(new Date()/1000) });
+      if(scheduleInTime.length > 0){
+        console.log(scheduleInTime[0].videoKey);
+      }
+    }, 1000);
+    return () => clearInterval(interVal);
+  }, [scheduleState]);
+
   const handleDateChange = (type) => {
     const tmp = moment(date, dateFormat);
     if (type === 'prev') {
