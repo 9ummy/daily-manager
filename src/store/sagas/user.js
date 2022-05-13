@@ -1,5 +1,6 @@
-import * as actionTypes from '../actions/actionTypes';
+import { push } from 'connected-next-router';
 import { all, put, takeLatest } from 'redux-saga/effects';
+import * as actionTypes from '../actions/actionTypes';
 
 function* joinUser(action) {
   try {
@@ -18,8 +19,7 @@ function* joinUser(action) {
         type: actionTypes.USER_SIGNIN_SUCCESS,
         payload: newUser.data,
       });
-
-      yield put((window.location.href = './login'));
+      yield put(push('/user/login'));
     } else {
       alert('가입에 실패했습니다!');
     }
@@ -62,6 +62,7 @@ function* loginUser(action) {
         type: actionTypes.USER_LOGIN_SUCCESS,
         payload: newUser.data,
       });
+      yield put(push('/schedules'));
     } else {
       alert('가입한 ID가 없거나 PW가 맞지 않습니다.');
     }
@@ -117,7 +118,7 @@ function* updateUserPassword(action) {
       });
       if (response2.status === 200) {
         alert('수정 완료');
-        yield put((window.location.href = './login'));
+        yield put(push('/user/login'));
       } else {
         alert('수정 하는데 오류가 발생했습니다.');
       }
