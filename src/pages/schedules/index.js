@@ -9,6 +9,7 @@ import { deleteSchedule } from 'store/actions/schedule';
 import { loginCheck } from 'utils/loginCheck';
 import Header from 'components/Header';
 import axios from 'axios';
+import Video , { setVideoSrc } from 'components/Video';
 
 const dateFormat = 'YYYY년 MM월 DD일';
 
@@ -18,30 +19,11 @@ function Schedules() {
   const router = useRouter();
 
   const [date, setDate] = useState(moment().format(dateFormat));
-
   const scheduleState = useSelector((state) => state.schedule);
 
   useEffect(() => {
     dispatch(fetchSchedules());
   }, [dispatch]);
-
-  useEffect(() => {
-    const interVal = setInterval(() => {
-      let scheduleInTime = scheduleState.scheduleList.filter((v) => {
-        return parseInt(new Date(v.time) / 1000) == parseInt(new Date() / 1000);
-      });
-      if (scheduleInTime.length > 0) {
-        const videoKey = scheduleInTime[0].videoKey;
-        const videoResponse = axios.post(`/api/video/${videoKey}`, {
-          "token" : JSON.parse(localStorage.getItem('user')).token
-        })
-        .then((result) => {
-          console.log(result.data.videoSrc);
-        });
-      }
-    }, 1000);
-    return () => clearInterval(interVal);
-  }, [scheduleState]);
 
   const handleDateChange = (type) => {
     const tmp = moment(date, dateFormat);
@@ -115,6 +97,7 @@ function Schedules() {
           일정 추가
         </button>
       </div>
+      <Video />
     </>
   );
 }
