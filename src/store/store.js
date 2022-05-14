@@ -19,15 +19,6 @@ const rootReducer = combineReducers({
   router: routerReducer,
 });
 
-// const store = createStore(
-//   rootReducer,
-//   composeWithDevTools(applyMiddleware(sagaMiddleware)),
-// );
-
-// const makeStore = () => store;
-
-// export const wrapper = createWrapper(makeStore);
-
 const reducer = (state, action) => {
   if (action.type === HYDRATE) {
     const nextState = {
