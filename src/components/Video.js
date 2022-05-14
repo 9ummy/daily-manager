@@ -3,11 +3,11 @@ import axios from "axios";
 import {useSelector} from "react-redux";
 
 function Video({
-  src = 'https://ai-platform-public.s3.ap-northeast-2.amazonaws.com/ysy_2_f0d555e2f5836ba8ac874450f35f03d6.mp4',
-  width = 500,
-  height = 500,
+  width = "50%",
 }) {
   const [isMuted, setIsMuted] = useState(true);
+  const [src, setSrc] = useState("https://ai-platform-prd.s3.ap-northeast-2.amazonaws.com/projectAssets/3d/capture_1920x1080_2022-05-14_10-19-45_0RP9H.mp4");
+
   const video = useRef();
 
   const unmuteVideo = () => {
@@ -16,10 +16,6 @@ function Video({
       setIsMuted(!isMuted);
     }
   };
-
-  const setVideoSrc = (newSrc) => {
-    src = newSrc;
-  }
 
   const scheduleState = useSelector((state) => state.schedule);
 
@@ -35,7 +31,7 @@ function Video({
         })
           .then((result) => {
             console.log(result.data.videoSrc);
-            setVideoSrc(result.data.videoSrc);
+            setSrc(result.data.videoSrc);
           });
       }
     }, 1000);
@@ -46,11 +42,11 @@ function Video({
     <div className="fixed-bottom">
       <video
         ref={video}
+        src = {src}
         autoPlay
         muted
-        style={{ width: `${width}px`, height: `${height}px` }}
+        style={{ width: `${width}` }}
       >
-        <source src={src} />
       </video>
       <button onClick={unmuteVideo}>{isMuted ? 'Unmute' : 'Mute'}</button>
     </div>
