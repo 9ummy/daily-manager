@@ -8,6 +8,7 @@ import Schedule from 'components/schedule/Schedule';
 import { deleteSchedule } from 'store/actions/schedule';
 import { loginCheck } from 'utils/loginCheck';
 import Header from 'components/Header';
+import axios from 'axios';
 
 const dateFormat = 'YYYY년 MM월 DD일';
 
@@ -30,7 +31,13 @@ function Schedules() {
         return parseInt(new Date(v.time) / 1000) == parseInt(new Date() / 1000);
       });
       if (scheduleInTime.length > 0) {
-        console.log(scheduleInTime[0].videoKey);
+        const videoKey = scheduleInTime[0].videoKey;
+        const videoResponse = axios.post(`/api/video/${videoKey}`, {
+          "token" : JSON.parse(localStorage.getItem('user')).token
+        })
+        .then((result) => {
+          console.log(result.data.videoSrc);
+        });
       }
     }, 1000);
     return () => clearInterval(interVal);
