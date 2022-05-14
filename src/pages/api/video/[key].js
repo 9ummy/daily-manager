@@ -6,7 +6,7 @@ export default async (req, res) => {
     method,
   } = req;
 
-  if(method === 'GET'){
+  if(method === 'POST'){
     try {
       axios.post(`https://dev.aistudios.com/api/odin/findProject`,
         {
@@ -20,7 +20,6 @@ export default async (req, res) => {
           "key": key
         })
         .then((response) => {
-          console.log(response);
           return res.status(200).json({
             success : true,
             videoSrc : response.data.data.video
