@@ -53,7 +53,7 @@ function ScheduleDetail() {
     );
     setData({
       ...newForm,
-      time: moment(`${newForm.date} ${newForm.time}`, 'yyyy-MM-DD HH:ss'),
+      time: moment(`${newForm.date} ${newForm.time}`, 'yyyy-MM-DD HH:mm분'),
     });
     setIsEditMode(false);
   };
@@ -125,7 +125,7 @@ function ScheduleDetail() {
           <div className={`card ${styles.card}`}>
             <h3>{data.title}</h3>
             <div>{moment(data.time).format('YYYY년 MM월 DD일')}</div>
-            <div>{moment(data.time).format('HH시 MM분')}</div>
+            <div>{moment(data.time).format('HH시 mm분')}</div>
             <div>{data.description}</div>
             <div className={styles.buttonContainer}>
               <button
