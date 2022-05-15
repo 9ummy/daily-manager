@@ -39,3 +39,11 @@ yarn dev
 ## 👀 미리보기 
 ![Frame 1](https://user-images.githubusercontent.com/49152108/168462092-0e854508-ab94-44ca-a59c-448365b1edc8.png)
 
+</br>
+
+## 📄 페이지 구성
+- `/user/login` : 로그인
+- `/user/join` : 회원가입
+- `/user/edit` : 유저 데이터 편집
+- `/schedules` : 일정 리스트 
+- `/schedules/[id]` : 일정 상세, 편집
