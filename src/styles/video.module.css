@@ -1,0 +1,19 @@
+.videoContainer {
+  position: fixed;
+  bottom: 0;
+  width: 300px;
+  height: 315px;
+  overflow: hidden;
+  display: block;
+}
+
+.video {
+  position: relative;
+  right: 810px;
+  bottom: 450px;
+}
+
+.videoButton {
+  position: absolute;
+  z-index: 100;
+}

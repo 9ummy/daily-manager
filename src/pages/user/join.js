@@ -1,7 +1,9 @@
 import Image from 'next/image';
-import LoginForm from 'components/user/LoginForm';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import JoinForm from 'components/user/JoinForm';
 
-export default function Home() {
+function Landing() {
   return (
     <div className="container w-25">
       <div className="row text-center m-5">
@@ -12,7 +14,9 @@ export default function Home() {
           height="154"
         />
       </div>
-      <LoginForm />
+      <JoinForm />
     </div>
   );
 }
+
+export default Landing;
