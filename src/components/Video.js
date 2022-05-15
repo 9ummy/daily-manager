@@ -41,19 +41,17 @@ function Video() {
   }, [scheduleState]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.videoContainer}>
-        <button className={styles.videoButton} onClick={unmuteVideo}>
-          {isMuted ? 'Unmute' : 'Mute'}
-        </button>
-        <video
-          className={styles.video}
-          ref={video}
-          src={src}
-          autoPlay
-          muted
-        ></video>
-      </div>
+    <div className={styles.videoContainer}>
+      <button className={styles.videoButton} onClick={unmuteVideo}>
+        {isMuted ? 'Unmute' : 'Mute'}
+      </button>
+      <video
+        className={styles.video}
+        ref={video}
+        src={src}
+        autoPlay
+        muted
+      ></video>
     </div>
   );
 }
