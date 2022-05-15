@@ -9,7 +9,9 @@ function Header() {
   const dispatch = useDispatch();
   return (
     <header className={styles.header}>
-      <Image src="/logo.png" alt="daily manager logo" width="140" height="60" />
+      <button className="btn btn-link" onClick={()=>router.push("/schedules")}>
+        <Image src="/logo.png" alt="daily manager logo" width="140" height="60" />
+      </button>
       <div className={styles.buttonContainer}>
         <button
           className="btn btn-outline-primary"
