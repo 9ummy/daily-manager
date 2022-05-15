@@ -16,12 +16,16 @@ function LoginForm() {
     }
   };
 
+  const lostRequired = () => {
+    alert("필수 입력 값이 누락되었습니다.")
+  }
+
   const joinButtonHandler = () => {
     router.push('/user/join');
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmitHandler)} noValidate>
+    <form className="form" onSubmit={handleSubmit(onSubmitHandler, lostRequired)} noValidate>
       <div className="mb-2">
         <div className="form-group row mb-2">
           <input

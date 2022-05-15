@@ -8,10 +8,18 @@ function EditPwForm(){
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
+  const checkPwValidation = (pw) => {
+    return pw.length >= 8 && /^(?=[a-z0-9]*$)(?:\d+[a-z]|[a-z]+\d)[a-z\d]*$/i.test(pw);
+  }
+
+
   const onPasswordSubmitHandler = (data) => {
     if (data){
       if (data.newPw !== data.newCpw) {
         alert('입력된 암호와 확인 암호가 다릅니다!');
+        return;
+      } else if (checkPwValidation(data.newPw) === false){
+        alert('올바르지 못한 비밀번호 입니다.');
         return;
       }
     }
@@ -49,6 +57,7 @@ function EditPwForm(){
           className="form-control"
           ref={register({ required: true })}
         />
+        <small className="form-text text-muted">영문,숫자만 조합 최소 8글자</small>
       </div>
       <div>
         <button type="submit" className="btn btn-light m-1">
