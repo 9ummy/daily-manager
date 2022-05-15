@@ -1,5 +1,6 @@
 import EditPwForm from 'components/user/EditPwForm';
 import EditModelForm from '../../components/user/EditModelForm';
+import SecessionButton from '../../components/user/SececessionButton'
 import { loginCheck } from '../../utils/loginCheck';
 import Header from 'components/Header';
 import {useRouter} from "next/router";
@@ -17,6 +18,9 @@ function Landing() {
         <EditPwForm />
         <br />
         <EditModelForm />
+        <br />
+        <SecessionButton />
+        <br />
         <button
           className="btn mt-1 btn-outline-primary"
           onClick={() => router.push("/schedules")}

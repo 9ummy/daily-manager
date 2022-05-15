@@ -55,11 +55,20 @@ export default async (req, res) => {
       }
     case 'DELETE':
       try {
-        await User.deleteOne({ _id: id });
-        return res.status(200).json({
-          success: true,
-          data: { id },
-        });
+        const query = {
+          id: id,
+        };
+        const user = await User.findOne(query);
+        if(bcrypt.compareSync(req.body.pw, user.pw) == false){
+          return res.status(204).json({
+            success: false
+          });
+        } else {
+          await User.deleteOne({ id: id });
+          return res.status(200).json({
+            success: true
+          });
+        }
       } catch (error) {
         return res.status(400).json({
           success: false,
