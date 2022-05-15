@@ -28,10 +28,14 @@ function NewSchedule() {
     setForm({ ...form, [name]: value });
   };
 
+  const isValidTitle = (text) => {};
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.title) {
       alert('일정 제목을 입력해주세요');
+    } else if (/[a-zA-Z]/.test(form.title)) {
+      alert('일정 제목은 한글, 숫자만 포함할 수 있습니다.');
     } else {
       try {
         axios
