@@ -10,12 +10,20 @@ function JoinForm() {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
+  const checkPwValidation = (pw) => {
+    return pw.length >= 8 && /^(?=[a-z0-9]*$)(?:\d+[a-z]|[a-z]+\d)[a-z\d]*$/i.test(pw);
+  }
+
   const onSubmitHandler = (data) => {
     if (data) {
       if (data.pw !== data.cpw) {
         alert('입력된 암호와 확인 암호가 다릅니다!');
         return;
+      } else if (checkPwValidation(data.pw) === false){
+        alert('올바르지 못한 비밀번호 입니다.');
+        return;
       }
+
       var joinUser = {
         id: data.id,
         email: data.email,
@@ -28,8 +36,12 @@ function JoinForm() {
     router.push('./login');
   };
 
+  const lostRequired = () => {
+    alert("필수 입력 값이 누락되었습니다.")
+  }
+
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmitHandler)} noValidate>
+    <form className="form" onSubmit={handleSubmit(onSubmitHandler, lostRequired)} noValidate>
       <div className="form-group row mb-2">
         <input
           type="text"
@@ -61,6 +73,7 @@ function JoinForm() {
           className="form-control"
           ref={register({ required: true })}
         />
+        <small className="form-text text-muted">영문,숫자만 조합 최소 8글자</small>
       </div>
 
       <div className="text-center">

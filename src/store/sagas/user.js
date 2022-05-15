@@ -20,10 +20,13 @@ function* joinUser(action) {
         payload: newUser.data,
       });
       yield put(push('/user/login'));
+    } else if(response.status == 400) {
+      alert("가입에 오류가 발생했습니다.")
     } else {
-      alert('가입에 실패했습니다!');
+      alert('중복된 ID 입니다.');
     }
   } catch (error) {
+    alert('가입에 오류가 발생했습니다!');
     yield put({
       type: actionTypes.USER_SIGNIN_FAILURE,
       payload: error.message,

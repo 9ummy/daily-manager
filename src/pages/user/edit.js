@@ -2,9 +2,12 @@ import EditPwForm from 'components/user/EditPwForm';
 import EditModelForm from '../../components/user/EditModelForm';
 import { loginCheck } from '../../utils/loginCheck';
 import Header from 'components/Header';
+import {useRouter} from "next/router";
 
 function Landing() {
   loginCheck();
+
+  const router = useRouter();
 
   return (
     <>
@@ -14,7 +17,14 @@ function Landing() {
         <EditPwForm />
         <br />
         <EditModelForm />
+        <button
+          className="btn mt-1 btn-outline-primary"
+          onClick={() => router.push("/schedules")}
+        >
+          뒤로가기
+        </button>
       </div>
+
     </>
   );
 }
