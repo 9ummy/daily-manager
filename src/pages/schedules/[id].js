@@ -53,7 +53,7 @@ function ScheduleDetail() {
     );
     setData({
       ...newForm,
-      time: moment(`${newForm.date} ${newForm.time}`, 'yyyy-MM-DD HH:mm분'),
+      time: moment(`${newForm.date} ${newForm.time}`, 'yyyy-MM-DD HH:mm'),
     });
     setIsEditMode(false);
   };
