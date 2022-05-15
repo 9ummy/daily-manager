@@ -6,6 +6,7 @@ const initialState = {
   loginUser: '',
   isLoggined: false,
   token: '',
+  tokenExpire: '',
   uuid: '',
 };
 
@@ -13,7 +14,6 @@ const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case HYDRATE:
       return { ...state, ...action.payload };
-//    case actionTypes.USER_FETCH_SUCCESS :
     case actionTypes.USER_UPDATE_PW_SUCCESS :
       return {
         ...state
@@ -21,10 +21,11 @@ const userReducer = (state = initialState, action) => {
 
     case actionTypes.USER_LOGIN_SUCCESS :
       return {
-        loginUser: action.payload.id,
+        loginUser: action.loginUser,
         isLoggined: true,
-        token: '',
-        uuid: '',
+        token: action.payload.token,
+        tokenExpire: action.payload.tokenExpire,
+        uuid: action.payload.uuid,
       };
     case actionTypes.USER_LOGOUT_SUCCESS :
       return {

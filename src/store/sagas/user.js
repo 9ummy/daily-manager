@@ -61,6 +61,7 @@ function* loginUser(action) {
       yield put({
         type: actionTypes.USER_LOGIN_SUCCESS,
         payload: newUser.data,
+        loginUser : action.payload.id
       });
       yield put(push('/schedules'));
     } else {
