@@ -38,9 +38,7 @@ function NewSchedule() {
           .post('/api/video', {
             token: loginUser.token,
             model: loginUser.model,
-            text: `${moment(form.time, 'HH:mm').format('HH시 mm분')}에 ${
-              form.title
-            } 일정이 있습니다.`,
+            text: `지금은 ${form.title} 일정을 할 시간이에요.`,
           })
           .then((res) => {
             dispatch(
