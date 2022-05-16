@@ -6,7 +6,7 @@ import styles from 'styles/video.module.css';
 function Video() {
   const [isMuted, setIsMuted] = useState(true);
   const [src, setSrc] = useState(
-    'https://ai-platform-prd.s3.ap-northeast-2.amazonaws.com/projectAssets/3d/capture_1920x1080_2022-05-14_10-19-45_0RP9H.mp4',
+    'https://ai-platform-public.s3.ap-northeast-2.amazonaws.com/ysy_2_4c6fdcca4dfd71cf9ccc5072e8e670c8.mp4',
   );
 
   const video = useRef();
